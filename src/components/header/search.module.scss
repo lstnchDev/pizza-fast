@@ -1,0 +1,20 @@
+.search{
+    input{
+        border-radius: 15px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 10px 15px;
+        max-width: 400px;
+        padding-left: 35px;
+        &:focus{
+        }
+    }
+    img{
+        width: 25px;
+        align-self: center;
+        align-items: center;
+        text-align: center;
+        align-content: center;
+        place-self: center;
+        position: absolute;
+    }
+}
