@@ -8,7 +8,7 @@ const Header: FC = () =>{
             <div className={styles.container}>
                 <div className={styles.logo}>
                     <h1>PIZZA FAST</h1>
-                    <p>топ 1 пицца во всем районе</p>
+                    <p>пицца №1 во всем районе</p>
                 </div>
                 <Cart />
             </div>

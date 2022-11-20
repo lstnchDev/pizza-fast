@@ -1,3 +1,5 @@
+@import './../../tools/varibaleStyles.scss';
+
 :root{
   --colorBackground: #FCDDB0;
   --colorHover: #FFFAD7;

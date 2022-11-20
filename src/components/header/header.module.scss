@@ -1,8 +1,21 @@
+@import './../../tools/varibaleStyles.scss';
+
 .header{
     border-bottom: 1px solid gray;
+    .logo{
+        cursor: pointer;
+        h1{
+            font-weight: 800;
+            margin: 0;
+        }
+        p{
+            margin: 0;
+        }
+    }
     .container{
         display: flex;
         align-items: center;
+        max-width: $wrapWidth;
         justify-content: space-between;
     }
 }

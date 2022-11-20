@@ -3,6 +3,12 @@
 .cart{
     background-color: $colorBtn;
     border-radius: 20px;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+    &:hover{
+        background-color: $colorBtnHover;
+    }
     .block{
         display: flex;
         justify-content: space-between;
