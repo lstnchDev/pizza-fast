@@ -1,0 +1,16 @@
+@import './../../../tools/varibaleStyles.scss';
+
+li{
+    list-style-type: none;
+    cursor: pointer;
+    background-color: $colorSecondGray;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: $colorMainBlack;
+    &:hover{
+        background-color: $colorHovernGray;
+    }
+}
+.active{
+    background-color: $colorMainGray;
+}

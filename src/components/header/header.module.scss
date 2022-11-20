@@ -1,21 +1,30 @@
 @import './../../tools/varibaleStyles.scss';
 
 .header{
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid $colorSecondGray;
+    padding: 25px;
     .logo{
+        display: flex;
         cursor: pointer;
+        img{
+            width: 55px;
+            padding-right: 10px;
+        }
         h1{
             font-weight: 800;
             margin: 0;
+            color: $colorMainBlack;
         }
         p{
             margin: 0;
+            color: $colorMainGray;
         }
     }
     .container{
         display: flex;
         align-items: center;
         max-width: $wrapWidth;
+        margin: 0 auto;
         justify-content: space-between;
     }
 }

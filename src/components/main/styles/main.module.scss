@@ -1,0 +1,12 @@
+@import './../../../tools/varibaleStyles.scss';
+
+.main{
+    display: flex;
+    justify-content: space-around;
+    ul{
+        max-width: 800px;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+    }
+}

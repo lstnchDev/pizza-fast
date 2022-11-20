@@ -1,20 +1,26 @@
+@import './../../tools/varibaleStyles.scss';
+
 .search{
     input{
         border-radius: 15px;
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        border: 1px solid $colorSecondGray;
         padding: 10px 15px;
-        max-width: 400px;
+        width: 400px;
         padding-left: 35px;
+        &::placeholder{
+            color: $colorMainGray;
+        }
         &:focus{
+            outline: none;
+            border: 1px solid $colorMainGray;
+            box-shadow: 0 0 10px #c7c7c7;
+
         }
     }
     img{
         width: 25px;
-        align-self: center;
-        align-items: center;
-        text-align: center;
-        align-content: center;
-        place-self: center;
         position: absolute;
+        top: 50px;
+        padding-left: 5px;
     }
 }
