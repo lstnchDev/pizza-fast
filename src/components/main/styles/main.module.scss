@@ -3,10 +3,11 @@
 .main{
     display: flex;
     justify-content: space-around;
-    ul{
-        max-width: 800px;
+    padding: 40px 0;
+    .categories{
         overflow: hidden;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
+        gap: 10px;
     }
 }

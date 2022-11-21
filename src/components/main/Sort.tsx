@@ -3,12 +3,9 @@ import styles from "./styles/sort.module.scss"
 
 
 export const sortList = [
-    { name: 'популярности (DESC)' },
-    { name: 'популярности (ASC)' },
-    { name: 'цене (DESC)'},
-    { name: 'цене (ASC)'},
-    { name: 'алфавиту (DESC)'},
-    { name: 'алфавиту (ASC)' },
+    { name: 'популярности' },
+    { name: 'цене'},
+    { name: 'алфавиту'},
   ];
   
 
@@ -19,14 +16,15 @@ const Sort: FC = ()=>{
         setClickState(!clickState)
     }
 
-    const sorts = sortList.map((sort)=><li>{sort.name}</li>)
+    const sorts = sortList.map((sort)=><li >{sort.name}</li>)
     return (
         <div className={styles.sort}>
-            <h3>Сортировка по: </h3>
-                <span onClick={onClickCat}>{sortList[0].name}</span>
-                {clickState && <ul>
-                        {sorts}
-                    </ul>}
+            <div className={styles.container}>
+                <h4>Сортировка по: <span onClick={onClickCat}>{sortList[0].name}</span></h4>
+                    {clickState && <ul className={styles.names}>
+                            {sorts}
+                        </ul>}
+            </div>
         </div>
     )
 }

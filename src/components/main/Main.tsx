@@ -8,7 +8,7 @@ const categories = ['Все', 'Мясные', 'Вегетарианская', '�
 const Main: FC = ()=>{
     return(
         <div className={styles.main}>
-            <ul>
+            <ul className={styles.categories}>
                 {categories.map((cat)=> <Category title={cat}/>)}
             </ul>
             <Sort />

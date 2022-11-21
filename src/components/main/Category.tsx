@@ -11,7 +11,7 @@ const Category: FC<CategiryName> = ({title})=>{
         setClickState(!clickState)
     }
     return (
-         <li onClick={onClickCat} className={clickState ? styles.active : ''}>
+         <li onClick={onClickCat} className={`${styles.categories}  ${clickState ? styles.active : ''}`}>
             {title}
          </li>   
     )

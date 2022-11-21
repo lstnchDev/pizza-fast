@@ -1,12 +1,13 @@
 @import './../../../tools/varibaleStyles.scss';
 
-li{
+.categories{
     list-style-type: none;
     cursor: pointer;
     background-color: $colorSecondGray;
     padding: 10px 20px;
     border-radius: 20px;
-    color: $colorMainBlack;
+    align-self: center;
+
     &:hover{
         background-color: $colorHovernGray;
     }

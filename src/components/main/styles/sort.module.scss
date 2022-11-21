@@ -1,0 +1,32 @@
+@import './../../../tools/varibaleStyles.scss';
+
+.sort{
+    h4{
+        span{
+            color: $colorSecondBtn;
+            cursor: pointer;
+        }
+
+    }
+    .container{
+        position: relative;
+    }
+    .names{
+        list-style-type: none;
+        position: absolute;
+        border-radius: 10px;
+        top: 10px;
+        left: 70px;
+        max-width: 250px;
+        padding: 0;
+        box-shadow: 0 0 10px #c7c7c7;
+        li{
+            padding: 10px 20px;
+            cursor: pointer;
+            color: $colorSecondBtn;
+            &:hover{
+                background-color: $colorMainBtn;
+            }
+        }
+    }
+}

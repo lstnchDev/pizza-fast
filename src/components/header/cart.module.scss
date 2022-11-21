@@ -1,14 +1,14 @@
 @import './../../tools/varibaleStyles.scss';
 
 .cart{
-    background-color: $colorBtn;
+    background-color: $colorMainBtn;
     border-radius: 20px;
     cursor: pointer;
     color: white;
     font-weight: 600;
 
     &:hover{
-        background-color: $colorBtnHover;
+        background-color: $colorSecondBtn;
     }
     .block{
         display: flex;
