@@ -1,0 +1,15 @@
+@import './../../../tools/varibaleStyles.scss';
+
+.pizza{
+    max-width: $wrapWidth;
+    margin: 0 auto;
+    .items{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5g0px;
+    }
+    ul{
+        list-style-type: none;
+    }
+}

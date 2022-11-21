@@ -1,0 +1,13 @@
+@import './../tools/varibaleStyles.scss';
+
+.button{
+    border-radius: 30px;
+    border: none;
+    background-color: $colorMainBtn;
+    color: white;
+    cursor: pointer;
+    padding: 10px 20px;
+    &:hover{
+        background-color: $colorSecondBtn;
+    }
+}

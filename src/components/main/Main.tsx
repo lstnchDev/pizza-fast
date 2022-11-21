@@ -1,17 +1,16 @@
 import { FC } from "react"
-import Category from "./Category";
-import Sort from "./Sort";
+import Category from "./sorts/Category";
+import Pizza from "./Pizza";
+import Sort from "./sorts/Sort";
 import styles from "./styles/main.module.scss"
+import Sorts from "./sorts/Sorts";
 
-const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
 const Main: FC = ()=>{
     return(
         <div className={styles.main}>
-            <ul className={styles.categories}>
-                {categories.map((cat)=> <Category title={cat}/>)}
-            </ul>
-            <Sort />
+            <Sorts />
+            <Pizza />
         </div>
     )
 }
