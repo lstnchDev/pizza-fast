@@ -26,5 +26,8 @@
         max-width: $wrapWidth;
         margin: 0 auto;
         justify-content: space-between;
+        .link{
+            text-decoration: none;
+        }
     }
 }

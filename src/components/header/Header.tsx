@@ -1,8 +1,9 @@
 import { FC } from "react"
-import Cart from "./Cart"
 import styles from "./header.module.scss"
 import Search from "./Search"
 import logoPizza from "./../../icons/logo-pizza.svg"
+import CartButton from "./CartButton"
+import { Link } from "react-router-dom"
 
 const Header: FC = () =>{
     return(
@@ -16,7 +17,9 @@ const Header: FC = () =>{
                     </div>
                 </div>
                 <Search />
-                <Cart />
+                <Link className={styles.link} to='/cart'>
+                    <CartButton />
+                </Link>
             </div>
         </div>
     )
