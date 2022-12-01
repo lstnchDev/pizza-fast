@@ -9,7 +9,7 @@ const CartItem: FC = ()=>{
          <div className={styles.cart}>
             <div className={styles.top}>
                 <h1>Корзина</h1>
-                <p>Очистить корзину</p>
+                <Button onClick={()=>console.log('sdsds')} title="Очистить корзину"/>
             </div>
             <div className={styles.main}>
                 {[...new Array(3)].map((_, index)=> <PizzaCart/>)}

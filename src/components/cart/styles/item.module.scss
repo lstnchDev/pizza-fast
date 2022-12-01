@@ -1,16 +1,15 @@
 .cart{
     .top{
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
 
     }
     .bottom{
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
     }
     .buttons{
         display: flex;
-        justify-content: space-between;
-
+        justify-content: space-around;
     }
 }

@@ -8,11 +8,13 @@ const PizzaCart: FC= ()=>{
         <div className={styles.pizza}>
             <img src={imagePizza} alt="" />
             <div className={styles.titles}>
-                <h3>Сырный цыпленок</h3>
+                <h2>Сырный цыпленок</h2>
                 <p>тонкое тесто, 26 см</p>
             </div>
             <div className={styles.counts}>
-                <Button onClick={()=>console.log('-')} title="-"/>2<Button onClick={()=>console.log('+')} title="+"/>
+                <Button onClick={()=>console.log('-')} title="-"/>
+                    <p>2</p>
+                <Button onClick={()=>console.log('+')} title="+"/>
             </div>
             <p>700 ₽</p>
             <Button onClick={()=>console.log('Х')} title="Х"/>

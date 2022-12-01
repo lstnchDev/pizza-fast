@@ -11,10 +11,12 @@ const Header: FC = () =>{
             <div className={styles.container}>
                 <div className={styles.logo}>
                     <img src={logoPizza} alt="" />
-                    <div className={styles.text}>
-                        <h1>PIZZA FAST</h1>
-                        <p>пицца №1 во всем районе</p>
-                    </div>
+                    <Link className={styles.link} to='/'>
+                        <div className={styles.text}>
+                            <h1>PIZZA FAST</h1>
+                            <p>пицца №1 во всем районе</p>
+                        </div>
+                    </Link>
                 </div>
                 <Search />
                 <Link className={styles.link} to='/cart'>
