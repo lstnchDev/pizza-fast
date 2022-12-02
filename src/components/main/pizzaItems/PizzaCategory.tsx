@@ -1,26 +1,38 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import styles from "./styles/categories.module.scss"
 
 const dough = ['тонкое', 'традиционное']
 const size = ['26', '30', '40']
 
 
-const PizzaCategory: FC = ()=>{
+type PizzaType={
+    type: number,
 
-    const [activeStateDough, setActiveDough] = useState(false)
-    const [activeStateSize, setActiveSize] = useState(false)
+}
 
-    const doughHandler = ()=>setActiveDough(true)
-    const sizeHandler = ()=>setActiveSize(true)
+const PizzaCategory: FC<PizzaType> = ({type})=>{
+    
+    const [activeState, setActive] = useState(false)
+    // const [activeStateSize, setActiveSize] = useState(false)
 
-    const doughSelector = dough.map(item=> <li onClick={doughHandler} className={styles.active}>{item}</li>)
-    const sizeSelector = size.map(item=> <li onClick={sizeHandler} className={styles.active}>{item}</li>)
+
+    useEffect(()=>{
+        if (type===0) setActive(true)
+
+        
+
+    }, [])
+    // const activeClass = activeState ? {styles.active} : ''
+
+    const doughHandler = ()=>setActive(!activeState)
+    // const sizeHandler = ()=>setActiveSize(true)
+
+
+    // const doughSelector = types.map(item=> <li onClick={doughHandler} className={styles.active}>{dough[type]}</li>)
+    // const sizeSelector = sizes.map(item=> <li onClick={sizeHandler} className={styles.active}>{item}</li>)
 
     return(
-        <div className={styles.category}>
-            <ul className={styles.dough}>{doughSelector}</ul>
-            <ul className={styles.size}>{sizeSelector}</ul>
-        </div>  
+            <li onClick={doughHandler} className={activeState ? styles.active : styles.unactive}>{dough[type]}</li>
     )
 }
 

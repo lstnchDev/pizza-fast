@@ -1,24 +1,13 @@
 @import './../../../../tools/varibaleStyles.scss';
 
-.category{
-    background-color: $colorSecondGray;
-    border-radius: 5px;
-    padding: 10px 0;
-
-    .dough, .size{
-        display: flex;
-        justify-content: space-around;
-        font-weight: 600;
-        font-size: 14px;
-        padding: 5px 0;
-        .active{
-            background-color: white;
-            border-radius: 6px;
-            padding: 10px 25px;
-            cursor: pointer;
-
-        }
-      
-      
-    }
+.active{
+    background-color: white;
+    border-radius: 6px;
+    padding: 10px 25px;
+    cursor: pointer;
+} 
+.unactive{
+    cursor: pointer;
+    align-self: center;
 }
+      
