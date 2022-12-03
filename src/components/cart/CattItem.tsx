@@ -1,10 +1,17 @@
 import { FC } from "react"
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { RootState } from "../../redux/store";
 import Button from "../../UI/Button";
 import PizzaCart from "./PizzaCart";
 import styles from "./styles/item.module.scss"
 
 const CartItem: FC = ()=>{
+
+    const cartPizza = useSelector((state: RootState)=>{
+        return state.cartPizzaSlices
+    })
+
     return(
          <div className={styles.cart}>
             <div className={styles.top}>
@@ -12,7 +19,16 @@ const CartItem: FC = ()=>{
                 <Button onClick={()=>console.log('sdsds')} title="Очистить корзину"/>
             </div>
             <div className={styles.main}>
-                {[...new Array(3)].map((_, index)=> <PizzaCart/>)}
+
+                {cartPizza.items.map((item)=> <PizzaCart 
+                    key={item.id}
+                    title={item.title}
+                    count={item.count}
+                    sizes={item.sizes}
+                    types={item.types} 
+                    imageUrl={item.imageUrl} 
+                    price={item.price} 
+                />)}
             </div>
             <div className={styles.bottom}>
                 <p>Всего пицц: 3шт.</p>

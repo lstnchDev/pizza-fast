@@ -3,20 +3,33 @@ import Button from "../../UI/Button";
 import imagePizza from './../../icons/pizza.png'
 import styles from './styles/pizzaCart.module.scss'
 
-const PizzaCart: FC= ()=>{
+
+type CartPizza = {
+    imageUrl: string,
+    title: string,
+    types: number,
+    sizes: number,
+    price: number,
+    count: number,
+}
+const dough = ['тонкое', 'традиционное']
+
+const PizzaCart: FC<CartPizza>= ({imageUrl, title, types, sizes, price, count})=>{
+    console.log(imageUrl)
     return (
         <div className={styles.pizza}>
-            <img src={imagePizza} alt="" />
+            <img src={imageUrl} alt="" />
             <div className={styles.titles}>
-                <h2>Сырный цыпленок</h2>
-                <p>тонкое тесто, 26 см</p>
+                <h2>{title}</h2>
+                <p>{dough[types]} тесто, {sizes} см</p>
             </div>
+            
             <div className={styles.counts}>
                 <Button onClick={()=>console.log('-')} title="-"/>
-                    <p>2</p>
+                    <p>{count}</p>
                 <Button onClick={()=>console.log('+')} title="+"/>
             </div>
-            <p>700 ₽</p>
+            <p>{price} ₽</p>
             <Button onClick={()=>console.log('Х')} title="Х"/>
         </div>
     )

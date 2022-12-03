@@ -25,7 +25,7 @@ interface IPizzas{
     status: Status
 }
 
-export const fetchAllPizza = createAsyncThunk('allPizza/fetchAllPuzza',async () => {
+export const fetchAllPizza = createAsyncThunk('allPizza/fetchAllPuzza', async () => {
     const response = await axios.get(
         'https://63891de6d94a7e5040ae7171.mockapi.io/pizzas/item'
     )
