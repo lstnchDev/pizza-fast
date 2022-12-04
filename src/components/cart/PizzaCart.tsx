@@ -16,6 +16,7 @@ const dough = ['тонкое', 'традиционное']
 
 const PizzaCart: FC<CartPizza>= ({imageUrl, title, types, sizes, price, count})=>{
     console.log(imageUrl)
+    
     return (
         <div className={styles.pizza}>
             <img src={imageUrl} alt="" />

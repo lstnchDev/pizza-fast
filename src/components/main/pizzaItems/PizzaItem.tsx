@@ -36,28 +36,44 @@ const PizzaItem: FC <PizzaType> = ({imageUrl, id, title, price, rating, sizes, t
     const [sizesActive, setSize] = useState(sizes[0])
     const [pizzaCartState, setPizza] = useState(false)
     const [pizzaState, setPizzaState] = useState({
-        id: id,
+        id: '17',
         imageUrl: imageUrl,
         title: title,
         types: typeActive,
         sizes: sizesActive,
         price: price,
         count: 0,
+        itemId: '-1'
     })
 
     const dispatch = useAppDispatch()
     const cartPizza = useSelector((state: RootState)=>{
+        console.log('cart')
         return state.cartPizzaSlices.items
     })
+
     useEffect(()=>{
-        
-        cartPizza.map((item)=> (item.id) === (id) ? setPizzaState(item) : '')
+        console.log(id, sizesActive, typeActive)
+        const found = cartPizza.find(item => item.itemId === `${id}${typeActive}${sizesActive}`)
+        if(found === undefined) setPizzaState({
+            id: '17',
+            imageUrl: imageUrl,
+            title: title,
+            types: typeActive,
+            sizes: sizesActive,
+            price: price,
+            count: -1,
+            itemId: '-1'
+        })
+        else setPizzaState(found)
+    }, [cartPizza, sizesActive, typeActive])
 
-    }, [cartPizza])
     const onClickHandler = async ()=> {
+        console.log(pizzaCartState)
+        console.log(pizzaState.itemId, `${id}${typeActive}${sizesActive}`)
+        console.log(pizzaState.itemId === `${id}${typeActive}${sizesActive}`)
 
-    
-        if(pizzaState.count>0){
+        if(pizzaState.count > 0){
             const response = await fetch(
                 `https://63891de6d94a7e5040ae7171.mockapi.io/pizzas/cart/${pizzaState.id}`, {
                     method: 'PUT',
@@ -65,7 +81,7 @@ const PizzaItem: FC <PizzaType> = ({imageUrl, id, title, price, rating, sizes, t
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        "itemId": id,
+                        "itemId": `${id}${typeActive}${sizesActive}`,
                         "imageUrl": imageUrl,
                         "title": title,
                         "types": typeActive,
@@ -76,10 +92,8 @@ const PizzaItem: FC <PizzaType> = ({imageUrl, id, title, price, rating, sizes, t
                     })
                 }    
             )
-            dispatch(fetchCartPizza())
-
-            console.log(pizzaState.count)
-        }
+            setPizza(false)
+            dispatch(fetchCartPizza())        }
         else {
             const response = await fetch(
                 'https://63891de6d94a7e5040ae7171.mockapi.io/pizzas/cart/', {
@@ -88,21 +102,19 @@ const PizzaItem: FC <PizzaType> = ({imageUrl, id, title, price, rating, sizes, t
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        "itemId": id,
+                        "itemId": `${id}${typeActive}${sizesActive}`,
                         "imageUrl": imageUrl,
                         "title": title,
                         "types": typeActive,
                         "sizes": sizesActive,
                         "price": price,
-                        "count": pizzaState.count+1,
+                        "count": 1,
                 
                     })
                 }
                 
             )
             dispatch(fetchCartPizza())
-
-            console.log(pizzaState.count)
         }
 
         

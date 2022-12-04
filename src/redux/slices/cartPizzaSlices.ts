@@ -15,6 +15,7 @@ type CartPizza = {
     sizes: number,
     price: number,
     count: number,
+    itemId: string,
     id: string
 }
 

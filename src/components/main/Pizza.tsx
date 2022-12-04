@@ -5,6 +5,7 @@ import PizzaItem from './pizzaItems/PizzaItem';
 import styles from './styles/pizza.module.scss'
 import { useState, useEffect, FC } from "react"
 import axios from 'axios';
+import { fetchCartPizza } from '../../redux/slices/cartPizzaSlices';
 
 
 const obj = {
@@ -47,6 +48,7 @@ const Pizza: FC = ()=>{
         // }
         // delData()
         dispatch(fetchAllPizza())
+        dispatch(fetchCartPizza())
 
     }, [])
 
