@@ -1,12 +1,23 @@
-import { FC, useState } from "react"
+import { FC, useState, useEffect } from "react"
+import { deleteSorstPizza, setSortsPizza } from "../../../redux/slices/allPizzaSlices"
+import { useAppDispatch } from "../../../redux/store"
 import styles from "./styles/category.module.scss"
 
 interface CategiryName{
-    title: string
+    title: string,
+    index: number
 }
 
-const Category: FC<CategiryName> = ({title})=>{
+const Category: FC<CategiryName> = ({title, index})=>{
    const [clickState, setClickState] = useState(false)
+
+   const dispatch = useAppDispatch()
+
+   useEffect(()=>{
+    console.log(clickState)
+     if (clickState) dispatch(setSortsPizza(index))
+     else dispatch(deleteSorstPizza(index))
+   }, [clickState])
     const onClickCat = ()=> {
         setClickState(!clickState)
     }

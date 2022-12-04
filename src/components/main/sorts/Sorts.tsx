@@ -9,7 +9,7 @@ const Sorts = ()=>{
     return (
         <div className={styles.sorts}>
             <ul className={styles.categories}>
-                {categories.map((cat)=> <Category title={cat}/>)}
+                {categories.map((cat)=> <Category key={categories.indexOf(cat)} index={categories.indexOf(cat)} title={cat}/>)}
             </ul>
             <Sort />
 

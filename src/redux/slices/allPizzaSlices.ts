@@ -22,6 +22,7 @@ type AllPizzasItem = {
 
 interface IPizzas{
     items: AllPizzasItem[],
+    sortItems: number[],
     status: Status
 }
 
@@ -34,6 +35,7 @@ export const fetchAllPizza = createAsyncThunk('allPizza/fetchAllPuzza', async ()
 
 const initialState: IPizzas = {
     items: [],
+    sortItems: [],
     status: Status.LOADING
 }
 
@@ -41,9 +43,13 @@ export const allPizzaSlices = createSlice({
     name: 'allPizza',
     initialState: initialState,
     reducers: {
-        getPizzas: (state)=>{
-
+        setSortsPizza: (state, action) => {
+            state.sortItems.push(action.payload)
+        },
+        deleteSorstPizza: (state, action) => {
+            state.sortItems = state.sortItems.filter((item)=> item !== action.payload)
         }
+       
     },
     extraReducers: (builder)=> {
         builder.addCase(fetchAllPizza.pending, (state, action) =>{
@@ -51,7 +57,6 @@ export const allPizzaSlices = createSlice({
         })
         builder.addCase(fetchAllPizza.fulfilled, (state, {payload}) =>{
             state.items = payload
-            console.log(state.items)
 
             state.status = Status.SUSCESS
         })
@@ -61,5 +66,5 @@ export const allPizzaSlices = createSlice({
     }
 })
 
-export const {getPizzas} = allPizzaSlices.actions
+export const {setSortsPizza, deleteSorstPizza} = allPizzaSlices.actions
 export default allPizzaSlices.reducer

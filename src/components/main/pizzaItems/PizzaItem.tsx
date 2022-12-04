@@ -48,12 +48,10 @@ const PizzaItem: FC <PizzaType> = ({imageUrl, id, title, price, rating, sizes, t
 
     const dispatch = useAppDispatch()
     const cartPizza = useSelector((state: RootState)=>{
-        console.log('cart')
         return state.cartPizzaSlices.items
     })
 
     useEffect(()=>{
-        console.log(id, sizesActive, typeActive)
         const found = cartPizza.find(item => item.itemId === `${id}${typeActive}${sizesActive}`)
         if(found === undefined) setPizzaState({
             id: '17',
@@ -115,6 +113,7 @@ const PizzaItem: FC <PizzaType> = ({imageUrl, id, title, price, rating, sizes, t
                 
             )
             dispatch(fetchCartPizza())
+
         }
 
         
