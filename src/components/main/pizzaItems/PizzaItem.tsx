@@ -67,10 +67,6 @@ const PizzaItem: FC <PizzaType> = ({imageUrl, id, title, price, rating, sizes, t
     }, [cartPizza, sizesActive, typeActive])
 
     const onClickHandler = async ()=> {
-        console.log(pizzaCartState)
-        console.log(pizzaState.itemId, `${id}${typeActive}${sizesActive}`)
-        console.log(pizzaState.itemId === `${id}${typeActive}${sizesActive}`)
-
         if(pizzaState.count > 0){
             const response = await fetch(
                 `https://63891de6d94a7e5040ae7171.mockapi.io/pizzas/cart/${pizzaState.id}`, {

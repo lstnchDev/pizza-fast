@@ -4,22 +4,27 @@ import { RootState, useAppDispatch } from '../../redux/store';
 import PizzaItem from './pizzaItems/PizzaItem';
 import styles from './styles/pizza.module.scss'
 import { useState, useEffect, FC } from "react"
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 
 const Pizza: FC = ()=>{
     const dispatch = useAppDispatch()
   
-
+    const fetch = ()=> dispatch(fetchAllPizza(2))
     useEffect(()=>{
-        dispatch(fetchAllPizza())
+        console.log(2)
+        dispatch(fetchAllPizza(1))
 
     }, [])
 
     const pizzas = useSelector((state: RootState)=>{
+        const searchSort = state.allPizzaSlices.searchSort.toLowerCase()
+        const items = state.allPizzaSlices.items
+
         const sort = state.allPizzaSlices.sortItems
-        if (sort.length>0) return state.allPizzaSlices.items.filter((item)=> sort.some(s=> item.category === s))
-        else return state.allPizzaSlices.items
+        if (sort.length>0) return items.filter((item)=> sort.some(category=> item.category === category)).filter(item => item.title.toLowerCase().includes(searchSort))
+        else return items.filter(item => item.title.toLowerCase().includes(searchSort))
     })
     const item = pizzas.map((pizza)=><PizzaItem 
         key={pizza.id}
@@ -33,10 +38,27 @@ const Pizza: FC = ()=>{
         category={pizza.category}
     
             />)
+    console.log(item.length)
     return(
         <div className={styles.pizza}>
             <h1>Все пиццы:</h1>
-            <ul className={styles.items}>{item}</ul>
+            <ul >
+                <InfiniteScroll
+                    dataLength={19} //This is important field to render the next data
+                    next={fetch}
+                    hasMore={item.length !== 19}
+                    loader={<h4>Loading...</h4>}
+                    className={styles.items}
+                    endMessage={
+                        <p style={{ textAlign: 'center' }}>
+                        <b>Yay! You have seen it all</b>
+                        </p>
+                    }
+                    >
+                    {item}
+                </InfiniteScroll>
+
+            </ul>
         </div>
     )
 }

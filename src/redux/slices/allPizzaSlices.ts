@@ -23,12 +23,34 @@ type AllPizzasItem = {
 interface IPizzas{
     items: AllPizzasItem[],
     sortItems: number[],
+    searchSort: string,
     status: Status
 }
 
-export const fetchAllPizza = createAsyncThunk('allPizza/fetchAllPuzza', async () => {
+interface ISorts{
+    sortBy: string,
+    order: string
+}
+export const fetchAllPizza = createAsyncThunk('allPizza/fetchAllPuzza', async (params: number) => {
     const response = await axios.get(
-        'https://63891de6d94a7e5040ae7171.mockapi.io/pizzas/item'
+        `https://63891de6d94a7e5040ae7171.mockapi.io/pizzas/item?page=${params}&limit=10`
+    )
+    return response.data as AllPizzasItem[]
+})
+
+export const fetchByCategory = createAsyncThunk('allPizza/fetchByCategory',async (params: number) => {
+    console.log(params)
+    const response = await axios.get(
+        `https://63891de6d94a7e5040ae7171.mockapi.io/pizzas/item?category=${params}`
+    )
+    return response.data as AllPizzasItem[]
+})
+export const fetchBySort = createAsyncThunk('allPizza/fetchBySort',async (params: ISorts) => {
+   
+    const {sortBy, order} = params
+
+    const response = await axios.get(
+        `https://63891de6d94a7e5040ae7171.mockapi.io/pizzas/item?sortBy=${sortBy}&order=${order}&page=1&limit=10`
     )
     return response.data as AllPizzasItem[]
 })
@@ -36,6 +58,7 @@ export const fetchAllPizza = createAsyncThunk('allPizza/fetchAllPuzza', async ()
 const initialState: IPizzas = {
     items: [],
     sortItems: [],
+    searchSort: "",
     status: Status.LOADING
 }
 
@@ -44,10 +67,14 @@ export const allPizzaSlices = createSlice({
     initialState: initialState,
     reducers: {
         setSortsPizza: (state, action) => {
-            state.sortItems.push(action.payload)
+            if (action.payload === 0) state.sortItems = []
+            else state.sortItems.push(action.payload)
         },
         deleteSorstPizza: (state, action) => {
             state.sortItems = state.sortItems.filter((item)=> item !== action.payload)
+        },
+        setSearchSort: (state, action) =>{
+            state.searchSort = action.payload
         }
        
     },
@@ -55,16 +82,29 @@ export const allPizzaSlices = createSlice({
         builder.addCase(fetchAllPizza.pending, (state, action) =>{
             state.status = Status.LOADING
         })
-        builder.addCase(fetchAllPizza.fulfilled, (state, {payload}) =>{
-            state.items = payload
+        builder.addCase(fetchAllPizza.fulfilled,(state, {payload}) =>{
+            payload.map((item)=> state.items.push(item))
 
             state.status = Status.SUSCESS
         })
         builder.addCase(fetchAllPizza.rejected, (state, action) =>{
             state.status = Status.ERROR
         })
+
+        builder.addCase(fetchByCategory.pending, (state, action) =>{
+            state.status = Status.LOADING
+        })
+        builder.addCase(fetchBySort.fulfilled,(state, {payload}) =>{
+            console.log(payload)
+            state.items = payload
+
+            state.status = Status.SUSCESS
+        })
+        builder.addCase(fetchByCategory.rejected, (state, action) =>{
+            state.status = Status.ERROR
+        })
     }
 })
 
-export const {setSortsPizza, deleteSorstPizza} = allPizzaSlices.actions
+export const {setSortsPizza, deleteSorstPizza, setSearchSort} = allPizzaSlices.actions
 export default allPizzaSlices.reducer

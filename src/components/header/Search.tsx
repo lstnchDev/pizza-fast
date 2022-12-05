@@ -1,12 +1,28 @@
-import { FC } from "react"
+import React, { FC, useEffect, useState } from "react"
+import { setSearchSort } from "../../redux/slices/allPizzaSlices"
+import { useAppDispatch } from "../../redux/store"
 import searchIcon from "./../../icons/search.svg"
 import styles from "./search.module.scss"
 
 const Search: FC = ()=>{
+
+    const [searchVal, setSearch] = useState("")
+
+    const dispatch = useAppDispatch()
+    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>)=>{
+        setSearch(e.target.value)
+    }
+    useEffect(()=>{
+        const timeout = setTimeout(() => {
+            dispatch(setSearchSort(searchVal))
+        }, 2500);
+        return () => clearTimeout(timeout)
+
+    }, [searchVal])
     return (
         <div className={styles.search}>
             <img src={searchIcon} alt="" />
-            <input placeholder="Найти пиццу..."/>
+            <input onChange={onChangeHandler} placeholder="Найти пиццу..."/>
         </div>
     )
 }
