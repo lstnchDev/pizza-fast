@@ -15,7 +15,6 @@ const Pizza: FC = ()=>{
   
     const fetch = ()=> dispatch(fetchAllPizza(2))
     useEffect(()=>{
-        console.log(2)
         dispatch(fetchAllPizza(1))
 
     }, [])
@@ -24,6 +23,7 @@ const Pizza: FC = ()=>{
         const searchSort = state.allPizzaSlices.searchSort.toLowerCase()
         const items = state.allPizzaSlices.items
 
+        console.log(items)
         const sort = state.allPizzaSlices.sortItems
         if (sort.length>0) return items.filter((item)=> sort.some(category=> item.category === category)).filter(item => item.title.toLowerCase().includes(searchSort))
         else return items.filter(item => item.title.toLowerCase().includes(searchSort))
@@ -40,26 +40,11 @@ const Pizza: FC = ()=>{
         category={pizza.category}
     
             />)
-    console.log(item.length)
     return(
         <div className={styles.pizza}>
             <h1>Все пиццы:</h1>
-            <ul >
-                <InfiniteScroll
-                    dataLength={19} //This is important field to render the next data
-                    next={fetch}
-                    hasMore={item.length !== 19}
-                    loader={loader}
-                    className={styles.items}
-                    endMessage={
-                        <p style={{ textAlign: 'center' }}>
-                        <b>Yay! You have seen it all</b>
-                        </p>
-                    }
-                    >
-                    {item}
-                </InfiniteScroll>
-
+            <ul className={styles.items}>
+                {item}
             </ul>
         </div>
     )

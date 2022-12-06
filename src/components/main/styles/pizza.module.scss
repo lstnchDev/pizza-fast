@@ -2,7 +2,7 @@
 
 .pizza{
     max-width: $wrapWidth;
-    margin: 0 auto;
+    margin: 50px auto;
     .items{
         display: flex;
         flex-wrap: wrap;
@@ -10,6 +10,9 @@
         gap: 30px;
         text-align: center;
 
+    }
+    h1{
+        padding-bottom: 40px;
     }
     ul{
         list-style-type: none;

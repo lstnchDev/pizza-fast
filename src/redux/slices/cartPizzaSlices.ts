@@ -25,7 +25,13 @@ export const fetchCartPizza = createAsyncThunk('cartPizza/fetchCartPizza',async 
     const response = await axios.get(
         'https://63891de6d94a7e5040ae7171.mockapi.io/pizzas/cart'
     )
+    console.log(response.data)
     return response.data as CartPizza[]
+})
+
+export const deleteCartPizza = createAsyncThunk('cartPizza/deleteCartPizza', async (params: string) => {
+     
+
 })
 
 const initialState: IPizza = {
@@ -40,8 +46,8 @@ export const cartPizzaSlices = createSlice({
     name: 'cartPizza',
     initialState: initialState,
     reducers: {
-        getPizza: (state)=>{
-
+        clearCarts: (state)=>{
+            state.items = []
         }
     },
     extraReducers: (builder) => {
@@ -52,10 +58,8 @@ export const cartPizzaSlices = createSlice({
         builder.addCase(fetchCartPizza.fulfilled, (state, {payload}) =>{
             state.items = payload
             state.status = Status.SUSCESS
-
             let priceSum = 0
             let count = 0
-
             payload.map((item)=> priceSum+= item.price)
             payload.map((item)=> count+= item.count)
             
@@ -67,10 +71,11 @@ export const cartPizzaSlices = createSlice({
             state.status = Status.ERROR
 
         })
+  
     },
 
 })
 
 
-export const {getPizza} = cartPizzaSlices.actions
+export const {clearCarts} = cartPizzaSlices.actions
 export default cartPizzaSlices.reducer

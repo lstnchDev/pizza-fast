@@ -90,7 +90,8 @@ export const allPizzaSlices = createSlice({
             state.status = Status.LOADING
         })
         builder.addCase(fetchBySort.fulfilled,(state, {payload}) =>{
-            state.items = payload
+            state.items = []
+            payload.map((item)=> state.items.push(item))
 
             state.status = Status.SUSCESS
         })

@@ -14,7 +14,6 @@ const Category: FC<CategiryName> = ({title, index})=>{
    const dispatch = useAppDispatch()
 
    useEffect(()=>{
-    console.log(clickState)
      if (clickState) dispatch(setSortsPizza(index))
      else dispatch(deleteSorstPizza(index))
    }, [clickState])
