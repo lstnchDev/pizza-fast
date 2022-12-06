@@ -1,10 +1,12 @@
 import axios from "axios"
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { Status } from "../../tools/constants";
 
 interface IPizza{
     items: CartPizza[],
     count: number,
-    priceSum: number
+    priceSum: number,
+    status: Status
 
 }
 
@@ -30,6 +32,7 @@ const initialState: IPizza = {
     items: [],
     count: 0,
     priceSum: 0,
+    status: Status.LOADING
 
 }
 
@@ -43,10 +46,13 @@ export const cartPizzaSlices = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchCartPizza.pending, (state, action) =>{
+            state.status = Status.LOADING
+
         })
         builder.addCase(fetchCartPizza.fulfilled, (state, {payload}) =>{
             state.items = payload
-            console.log(payload)
+            state.status = Status.SUSCESS
+
             let priceSum = 0
             let count = 0
 
@@ -58,6 +64,8 @@ export const cartPizzaSlices = createSlice({
 
         })
         builder.addCase(fetchCartPizza.rejected, (state, action) =>{
+            state.status = Status.ERROR
+
         })
     },
 

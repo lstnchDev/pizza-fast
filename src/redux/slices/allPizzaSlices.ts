@@ -1,13 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import axios from "axios"
+import { Status } from '../../tools/constants';
 
-
-enum Status{
-    LOADING = 'loading',
-    SUSCESS = 'suscess',
-    ERROR = 'error'
-}
 
 type AllPizzasItem = {
     id: string,
@@ -95,7 +90,6 @@ export const allPizzaSlices = createSlice({
             state.status = Status.LOADING
         })
         builder.addCase(fetchBySort.fulfilled,(state, {payload}) =>{
-            console.log(payload)
             state.items = payload
 
             state.status = Status.SUSCESS

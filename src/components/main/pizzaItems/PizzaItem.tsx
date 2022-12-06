@@ -1,8 +1,11 @@
+import { set } from 'immer/dist/internal';
 import { FC, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import cartPizzaSlices, { fetchCartPizza } from '../../../redux/slices/cartPizzaSlices';
 import { RootState, useAppDispatch } from '../../../redux/store';
+import { Status } from '../../../tools/constants';
 import Button from '../../../UI/Button';
+import { loader } from '../../../UI/Loader';
 import styles from './styles/item.module.scss';
 
 type PizzaType = {
@@ -34,7 +37,7 @@ const PizzaItem: FC <PizzaType> = ({imageUrl, id, title, price, rating, sizes, t
 
     const [typeActive, setType] = useState(types[0])
     const [sizesActive, setSize] = useState(sizes[0])
-    const [pizzaCartState, setPizza] = useState(false)
+    const [pizzaLoaderState, setLoader] = useState(false)
     const [pizzaState, setPizzaState] = useState({
         id: '17',
         imageUrl: imageUrl,
@@ -48,11 +51,11 @@ const PizzaItem: FC <PizzaType> = ({imageUrl, id, title, price, rating, sizes, t
 
     const dispatch = useAppDispatch()
     const cartPizza = useSelector((state: RootState)=>{
-        return state.cartPizzaSlices.items
+        return state.cartPizzaSlices
     })
 
     useEffect(()=>{
-        const found = cartPizza.find(item => item.itemId === `${id}${typeActive}${sizesActive}`)
+        const found = cartPizza.items.find(item => item.itemId === `${id}${typeActive}${sizesActive}`)
         if(found === undefined) setPizzaState({
             id: '17',
             imageUrl: imageUrl,
@@ -63,7 +66,11 @@ const PizzaItem: FC <PizzaType> = ({imageUrl, id, title, price, rating, sizes, t
             count: -1,
             itemId: '-1'
         })
-        else setPizzaState(found)
+        else {
+            setPizzaState(found)
+
+        }
+        
     }, [cartPizza, sizesActive, typeActive])
 
     const onClickHandler = async ()=> {
@@ -86,8 +93,8 @@ const PizzaItem: FC <PizzaType> = ({imageUrl, id, title, price, rating, sizes, t
                     })
                 }    
             )
-            setPizza(false)
-            dispatch(fetchCartPizza())        }
+            dispatch(fetchCartPizza())        
+        }
         else {
             const response = await fetch(
                 'https://63891de6d94a7e5040ae7171.mockapi.io/pizzas/cart/', {
@@ -109,16 +116,20 @@ const PizzaItem: FC <PizzaType> = ({imageUrl, id, title, price, rating, sizes, t
                 
             )
             dispatch(fetchCartPizza())
-
         }
+        setLoader(true)
+        setTimeout(()=>{
+            setLoader(false)
 
-        
+        }, 500)
+   
     }
 
     const pizzaTypes = types.map((type)=> <li className={(typeActive===type) ? styles.active : styles.unactive} onClick={()=>setType(type)}>{dough[type]}</li>) 
     const pizzaSizes = sizes.map((size)=> <li className={(sizesActive===size)? styles.active : styles.unactive} onClick={()=>setSize(size)}>{size}</li>) 
 
     return (
+        
         <li className={styles.pizza}>
             <img className={styles.image} src={imageUrl} alt="" />
             <h3>{title}</h3>
@@ -133,7 +144,7 @@ const PizzaItem: FC <PizzaType> = ({imageUrl, id, title, price, rating, sizes, t
 
             <div className={styles.bottom}>
                 <h4>от {price} ₽</h4>
-                <Button onClick={onClickHandler} title="Добавить"/>
+                {pizzaLoaderState ? loader : <Button onClick={onClickHandler} title="Добавить"/>  }
             </div>
         </li>
     )

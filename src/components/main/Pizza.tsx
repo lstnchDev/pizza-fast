@@ -5,6 +5,8 @@ import PizzaItem from './pizzaItems/PizzaItem';
 import styles from './styles/pizza.module.scss'
 import { useState, useEffect, FC } from "react"
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { ColorRing } from 'react-loader-spinner';
+import { loader } from '../../UI/Loader';
 
 
 
@@ -47,7 +49,7 @@ const Pizza: FC = ()=>{
                     dataLength={19} //This is important field to render the next data
                     next={fetch}
                     hasMore={item.length !== 19}
-                    loader={<h4>Loading...</h4>}
+                    loader={loader}
                     className={styles.items}
                     endMessage={
                         <p style={{ textAlign: 'center' }}>
