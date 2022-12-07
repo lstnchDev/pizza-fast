@@ -1,9 +1,14 @@
 .sorts{
     display: flex;
     justify-content: space-around;
+    @media (max-width: 655px) {
+        display: block;
+
+    }
     .categories{
-        overflow: hidden;
         display: flex;
+        flex-wrap: wrap;
         gap: 10px;
+      
     }
 }

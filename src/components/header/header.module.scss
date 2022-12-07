@@ -5,7 +5,13 @@
     padding: 25px;
     .logo{
         display: flex;
+        text-decoration: none;
         cursor: pointer;
+        .text{
+            @media (max-width: 800px) {
+                display: none;
+            }
+        }
         img{
             width: 55px;
             padding-right: 10px;

@@ -1,15 +1,20 @@
 @import './../../../../tools/varibaleStyles.scss';
 
 .sort{
-    z-index: 999;
+    width: 400px;
+  }
 
     h4{
+        @media (max-width: 375px) {
+            width: 300px;
+            text-align: center;
+        }
         span{
             color: $colorSecondBtn;
             cursor: pointer;
         }
 
-    }
+    
     .container{
         position: relative;
         z-index: 999;

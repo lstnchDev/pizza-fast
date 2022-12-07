@@ -5,8 +5,18 @@
         border-radius: 15px;
         border: 1px solid $colorSecondGray;
         padding: 10px 15px;
-        width: 400px;
         padding-left: 35px;
+        width: 400px;
+
+        @media (max-width: 945px){
+            width: 250px;
+        }
+        @media (max-width: 620px){
+            width: 159px;
+        }
+        @media (max-width: 520px){
+            display: none;
+        }
         &::placeholder{
             color: $colorMainGray;
         }
@@ -22,5 +32,8 @@
         position: absolute;
         top: 50px;
         padding-left: 5px;
+        @media (max-width: 520px){
+            display: none;
+        }
     }
 }

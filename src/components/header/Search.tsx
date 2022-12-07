@@ -9,13 +9,12 @@ const Search: FC = ()=>{
     const [searchVal, setSearch] = useState("")
 
     const dispatch = useAppDispatch()
-    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>)=>{
-        setSearch(e.target.value)
-    }
+    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
+    
     useEffect(()=>{
         const timeout = setTimeout(() => {
             dispatch(setSearchSort(searchVal))
-        }, 2500);
+        }, 1000);
         return () => clearTimeout(timeout)
 
     }, [searchVal])

@@ -3,27 +3,16 @@ import { fetchAllPizza } from '../../redux/slices/allPizzaSlices';
 import { RootState, useAppDispatch } from '../../redux/store';
 import PizzaItem from './pizzaItems/PizzaItem';
 import styles from './styles/pizza.module.scss'
-import { useState, useEffect, FC } from "react"
-import InfiniteScroll from 'react-infinite-scroll-component';
-import { ColorRing } from 'react-loader-spinner';
-import { loader } from '../../UI/Loader';
+import { useEffect, FC } from "react"
 
 
 
 const Pizza: FC = ()=>{
-    const dispatch = useAppDispatch()
-  
-    const fetch = ()=> dispatch(fetchAllPizza(2))
-    useEffect(()=>{
-        dispatch(fetchAllPizza(1))
-
-    }, [])
-
+ 
     const pizzas = useSelector((state: RootState)=>{
         const searchSort = state.allPizzaSlices.searchSort.toLowerCase()
         const items = state.allPizzaSlices.items
 
-        console.log(items)
         const sort = state.allPizzaSlices.sortItems
         if (sort.length>0) return items.filter((item)=> sort.some(category=> item.category === category)).filter(item => item.title.toLowerCase().includes(searchSort))
         else return items.filter(item => item.title.toLowerCase().includes(searchSort))

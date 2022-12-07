@@ -1,9 +1,8 @@
-.cart{
-    .top{
-        display: flex;
-        justify-content: space-around;
+@import './../../../tools/varibaleStyles.scss';
 
-    }
+.cart{
+    padding: 0;
+
     .bottom{
         display: flex;
         justify-content: space-around;
@@ -11,5 +10,26 @@
     .buttons{
         display: flex;
         justify-content: space-around;
+        align-items: center;
+
     }
+    .btnBack{
+        text-decoration: none;
+        background-color: $colorMainBlack;
+        color: white;
+        border-radius: 15px;
+        padding: 10px 20px;
+
+    }
+    .btnPay{
+        border-radius: 20px;
+        border: none;
+        background-color: $colorMainBlack;
+        color: white;
+        cursor: pointer;
+        padding: 20px;
+
+        &:hover{
+            background-color: $colorSecondBtn;
+        }    }
 }

@@ -1,9 +1,7 @@
-import { set } from 'immer/dist/internal';
 import { FC, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import cartPizzaSlices, { fetchCartPizza } from '../../../redux/slices/cartPizzaSlices';
 import { RootState, useAppDispatch } from '../../../redux/store';
-import { Status } from '../../../tools/constants';
 import Button from '../../../UI/Button';
 import { loader } from '../../../UI/Loader';
 import styles from './styles/item.module.scss';
@@ -19,21 +17,10 @@ type PizzaType = {
     rating: number
 
 }
-type PizzaCart = {
-    imageUrl: string,
-    title: string,
-    types: number,
-    sizes: number,
-    price: number,
-    count: number,
-    itemId: string
-
-}
-
 
 const dough = ['тонкое', 'традиционное']
 
-const PizzaItem: FC <PizzaType> = ({imageUrl, id, title, price, rating, sizes, types, category})=>{
+const PizzaItem: FC <PizzaType> = ({imageUrl, id, title, price, sizes, types})=>{
 
     const [typeActive, setType] = useState(types[0])
     const [sizesActive, setSize] = useState(sizes[0])
@@ -50,9 +37,8 @@ const PizzaItem: FC <PizzaType> = ({imageUrl, id, title, price, rating, sizes, t
     })
 
     const dispatch = useAppDispatch()
-    const cartPizza = useSelector((state: RootState)=>{
-        return state.cartPizzaSlices
-    })
+    const cartPizza = useSelector((state: RootState)=> state.cartPizzaSlices)
+    
 
     useEffect(()=>{
         const found = cartPizza.items.find(item => item.itemId === `${id}${typeActive}${sizesActive}`)
@@ -82,12 +68,6 @@ const PizzaItem: FC <PizzaType> = ({imageUrl, id, title, price, rating, sizes, t
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        "itemId": `${id}${typeActive}${sizesActive}`,
-                        "imageUrl": imageUrl,
-                        "title": title,
-                        "types": typeActive,
-                        "sizes": sizesActive,
-                        "price": price,
                         "count": pizzaState.count+1,
                 
                     })

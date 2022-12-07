@@ -17,9 +17,8 @@ const Category: FC<CategiryName> = ({title, index})=>{
      if (clickState) dispatch(setSortsPizza(index))
      else dispatch(deleteSorstPizza(index))
    }, [clickState])
-    const onClickCat = ()=> {
-        setClickState(!clickState)
-    }
+
+    const onClickCat = ()=> setClickState(!clickState)
     return (
          <li onClick={onClickCat} className={`${styles.categories}  ${clickState ? styles.active : ''}`}>
             {title}

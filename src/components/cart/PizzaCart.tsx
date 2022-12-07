@@ -1,9 +1,9 @@
 import axios from "axios";
-import { FC, useState } from "react";
-import { deleteCartPizza, fetchCartPizza } from "../../redux/slices/cartPizzaSlices";
+import { FC } from "react";
+import { fetchCartPizza } from "../../redux/slices/cartPizzaSlices";
 import { useAppDispatch } from "../../redux/store";
+import { pizzaAdd, pizzaDec, pizzaDelete } from "../../tools/fetchsPizzas";
 import Button from "../../UI/Button";
-import imagePizza from './../../icons/pizza.png'
 import styles from './styles/pizzaCart.module.scss'
 
 
@@ -19,33 +19,26 @@ type CartPizza = {
 const dough = ['тонкое', 'традиционное']
 
 const PizzaCart: FC<CartPizza>= ({imageUrl, id, title, types, sizes, price, count})=>{
-    console.log(imageUrl)
-    const [clickState, setState] = useState(false)
-
     const dispatch = useAppDispatch()
     const onDeleteHandler = async ()=> {
-        const response = await axios.delete(
-            `https://63891de6d94a7e5040ae7171.mockapi.io/pizzas/cart/${id}`
-        )     
-        dispatch(fetchCartPizza())
+        pizzaDelete(id)
+        setTimeout(()=>{
+            dispatch(fetchCartPizza())
+        }, 1000)
     }
     const onAddHandler = async ()=> {
-        const response = await axios.put(
-            `https://63891de6d94a7e5040ae7171.mockapi.io/pizzas/cart/${id}`,{
-                "count": count+1,
-            }
-        )     
-        dispatch(fetchCartPizza())
+        pizzaAdd(id, count+1)
+   
+        setTimeout(()=>{
+            dispatch(fetchCartPizza())
+        }, 1000)
     }
     const onDecHandler = async ()=> {
-        const response = await axios.put(
-            `https://63891de6d94a7e5040ae7171.mockapi.io/pizzas/cart/${id}`, {
-                "count": count-1,
-            }
-        )     
-        dispatch(fetchCartPizza())
+        pizzaDec(id, count-1)
+        setTimeout(()=>{
+            dispatch(fetchCartPizza())
+        }, 1000)   
     }
-
     return (
         <div className={styles.pizza}>
             <img src={imageUrl} alt="" />
